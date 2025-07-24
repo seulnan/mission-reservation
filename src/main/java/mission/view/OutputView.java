@@ -14,10 +14,10 @@ public class OutputView {
 
         for (Reservation r : reservations) {
             System.out.printf("|%s\t|%s\t|%s\t|%s\t\t|\n",
-                    r.getReservedAt(),
-                    r.getStartsAt(),
-                    r.getEndsAt(),
-                    r.getName()
+                    r.reservedAt(),
+                    r.startsAt(),
+                    r.endsAt(),
+                    r.name()
             );
         }
     }
