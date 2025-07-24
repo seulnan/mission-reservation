@@ -1,31 +1,34 @@
 package mission.validate;
 
+import java.time.LocalDateTime;
 import mission.model.Reservation;
 
 import java.time.LocalDate;
 import java.util.List;
+import mission.repository.ReservationRepository;
 
 public class ReservationValidator {
-    private static final LocalDate START_DATE = LocalDate.of(2025, 7, 28);
-    private static final LocalDate END_DATE = LocalDate.of(2025, 8, 3);
+    private final ReservationRepository repository;
 
-    public static void validateReservationTime(Reservation r) {
-        if (r.startsAt().isAfter(r.endsAt())) {
-            throw new IllegalArgumentException("시작 날짜가 종료 날짜보다 늦습니다.");
-        }
-        if (r.startsAt().toLocalDate().isBefore(START_DATE) ||
-                r.endsAt().toLocalDate().isAfter(END_DATE)) {
-            throw new IllegalArgumentException("예약 가능한 날짜는 2025-07-28부터 2025-08-03까지입니다.");
-        }
+    public ReservationValidator(ReservationRepository repository) {
+        this.repository = repository;
     }
 
-    public static void validateReservationOverlap(Reservation newRes, List<Reservation> existing) {
-        for (Reservation r : existing) {
-            boolean overlaps = newRes.startsAt().isBefore(r.endsAt()) &&
-                    newRes.endsAt().isAfter(r.startsAt());
-            if (overlaps) {
-                throw new IllegalArgumentException("해당 시간에 예약이 존재합니다.");
-            }
+    public void validate(Reservation newReservation) {
+        if (newReservation.getStartsAt().isAfter(newReservation.getEndsAt())) {
+            throw new IllegalArgumentException(ReservationError.INVALID_TIME_RANGE.getMessage());
         }
+
+        if (newReservation.getStartsAt().isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException(ReservationError.PAST_RESERVATION.getMessage());
+        }
+
+        repository.findAll().forEach(existing -> {
+            boolean overlap = !(newReservation.getEndsAt().isBefore(existing.getStartsAt()) ||
+                    newReservation.getStartsAt().isAfter(existing.getEndsAt()));
+            if (overlap) {
+                throw new IllegalArgumentException(ReservationError.DUPLICATE_RESERVATION.getMessage());
+            }
+        });
     }
 }

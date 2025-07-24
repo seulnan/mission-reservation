@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReservationRepository {
     private final List<Reservation> reservations = new ArrayList<>();
 
@@ -15,6 +18,6 @@ public class ReservationRepository {
     }
 
     public List<Reservation> findAll() {
-        return Collections.unmodifiableList(reservations);
+        return new ArrayList<>(reservations);
     }
 }

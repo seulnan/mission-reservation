@@ -4,6 +4,7 @@ import mission.controller.ReservationController;
 
 public class Application {
     public static void main(String[] args) {
-        new ReservationController().run();
+        ReservationController controller = AppConfig.reservationController();
+        controller.run();
     }
 }
