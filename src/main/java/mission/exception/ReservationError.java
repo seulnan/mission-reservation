@@ -1,8 +1,6 @@
 package mission.exception;
 
 public enum ReservationError {
-    NULL_INPUT("입력이 비어 있습니다."),
-    INVALID_FORMAT("입력 형식이 잘못되었습니다. 예: 2025-07-28T11:00 - 2025-07-28T13:00 - 홍길동"),
     INVALID_TIME_RANGE("시작 시간이 종료 시간보다 늦을 수 없습니다."),
     PAST_RESERVATION("과거 시간으로는 예약할 수 없습니다."),
     DUPLICATE_RESERVATION("해당 시간에 이미 예약이 존재합니다.");

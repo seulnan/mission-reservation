@@ -39,9 +39,9 @@ public class ReservationController {
                 Reservation reservation = InputParser.parse(input);
                 reservationValidator.validate(reservation);
                 repository.save(reservation);
-                outputView.printSaved(reservation);
+                outputView.printSaved();
             } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
+                outputView.printError(e);
             }
             outputView.printAll(repository.findAll());
         }

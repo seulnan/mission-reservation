@@ -9,7 +9,7 @@ import java.util.List;
 public class OutputView {
     private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
-    public void printSaved(Reservation r) {
+    public void printSaved() {
         System.out.println("예약이 완료되었습니다.");
     }
 
@@ -26,8 +26,8 @@ public class OutputView {
         }
     }
 
-    public void printError(String message) {
-        System.out.println("[ERROR] " + message);
+    public void printError(Exception e) {
+        System.out.println(e.getClass().getSimpleName() + " : " + e.getMessage());
     }
 
     public void printExit() {
