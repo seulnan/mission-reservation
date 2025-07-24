@@ -1,6 +1,8 @@
 package mission.validate;
 
 
+import mission.exception.ReservationError;
+
 public class InputValidator {
     public void validate(String input) {
         if (input == null || input.isBlank()) {

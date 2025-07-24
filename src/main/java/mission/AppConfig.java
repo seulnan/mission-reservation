@@ -20,6 +20,7 @@ public class AppConfig {
         );
     }
 
+    // TODO:
     public InputView inputView() {
         return new InputView();
     }

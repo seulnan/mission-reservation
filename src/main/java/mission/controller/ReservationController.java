@@ -12,17 +12,15 @@ import mission.view.OutputView;
 public class ReservationController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final InputParser parser;
     private final InputValidator inputValidator;
     private final ReservationValidator reservationValidator;
     private final ReservationRepository repository;
 
-    public ReservationController(InputView inputView, OutputView outputView, InputParser parser,
+    public ReservationController(InputView inputView, OutputView outputView,
                                  InputValidator inputValidator, ReservationValidator reservationValidator,
                                  ReservationRepository repository) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.parser = parser;
         this.inputValidator = inputValidator;
         this.reservationValidator = reservationValidator;
         this.repository = repository;
@@ -38,7 +36,7 @@ public class ReservationController {
 
             try {
                 inputValidator.validate(input);
-                Reservation reservation = parser.parse(input);
+                Reservation reservation = InputParser.parse(input);
                 reservationValidator.validate(reservation);
                 repository.save(reservation);
                 outputView.printSaved(reservation);

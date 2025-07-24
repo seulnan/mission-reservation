@@ -1,6 +1,7 @@
 package mission.validate;
 
 import java.time.LocalDateTime;
+import mission.exception.ReservationError;
 import mission.model.Reservation;
 
 import java.time.LocalDate;
