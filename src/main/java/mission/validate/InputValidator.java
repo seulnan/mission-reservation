@@ -1,6 +1,5 @@
 package mission.validate;
 
-
 import mission.exception.InputError;
 import mission.exception.InvalidInputException;
 
